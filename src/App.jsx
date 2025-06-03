@@ -23,9 +23,7 @@ const App = () => {
 
     try {
       const endpoint = query
-        ? `${API_BASE_URL}/search/movie?query=${encodeURIComponent(
-            query
-          )}&api_key=${API_KEY}&language=es-ES`
+        ? `${API_BASE_URL}/search/movie?query=${encodeURIComponent(query)}&api_key=${API_KEY}&language=es-ES`
         : `${API_BASE_URL}/discover/movie?sort_by=popularity.desc&api_key=${API_KEY}&language=es-ES`;
 
       const response = await fetch(endpoint);
@@ -70,55 +68,83 @@ const App = () => {
   }, []);
 
   return (
-    <main>
-      <div className="pattern" />
+    <>
+      <main>
+        <div className="pattern" />
 
-      <div className="wrapper">
-        <header>
-          <img src="./hero.png" alt="Hero Banner" />
-          <h1>
-            Encuentra <span className="text-gradient">películas</span> que
-            disfrutarás sin complicaciones
-          </h1>
+        <div className="wrapper">
+          <header>
+            <img src="./hero.png" alt="Hero Banner" />
+            <h1>
+              Encuentra <span className="text-gradient">películas</span> que
+              disfrutarás sin complicaciones
+            </h1>
 
-          <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-        </header>
+            <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+          </header>
 
-        {trendingMovies.length > 0 && (
-          <section className="trending">
-            <h2>Lo más visto</h2>
+          {trendingMovies.length > 0 && (
+            <section className="trending">
+              <h2>Lo más visto</h2>
 
-            <ul>
-              {trendingMovies.map((movie, index) => (
-                <li key={movie.id}>
-                  <p>{index + 1}</p>
-                  <img
-                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                    alt={movie.title}
-                  />
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-
-        <section className="all-movies">
-          <h2>Todas las películas</h2>
-
-          {isLoading ? (
-            <Spinner />
-          ) : errorMessage ? (
-            <p className="text-red-500">{errorMessage}</p>
-          ) : (
-            <ul>
-              {movieList.map((movie) => (
-                <MovieCard key={movie.id} movie={movie} />
-              ))}
-            </ul>
+              <ul>
+                {trendingMovies.map((movie, index) => (
+                  <li key={movie.id}>
+                    <p>{index + 1}</p>
+                    <img
+                      src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                      alt={movie.title}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </section>
           )}
-        </section>
-      </div>
-    </main>
+
+          <section className="all-movies">
+            <h2>Todas las películas</h2>
+
+            {isLoading ? (
+              <Spinner />
+            ) : errorMessage ? (
+              <p className="text-red-500">{errorMessage}</p>
+            ) : (
+              <ul>
+                {movieList.map((movie) => (
+                  <MovieCard key={movie.id} movie={movie} />
+                ))}
+              </ul>
+            )}
+          </section>
+        </div>
+      </main>
+
+      <footer className="text-center p-6 text-sm text-gray-400">
+				 <hr className="border-t border-gray-700 m-5" />
+        <p>
+          Construido con <strong>React</strong>, <strong>Vite</strong> y <strong>Tailwind CSS</strong> &mdash; usando datos de{" "}
+          <a
+            href="https://www.themoviedb.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-indigo-400 underline hover:text-indigo-300"
+          >
+            The Movie Database (TMDB)
+          </a>.
+        </p>
+        <p>
+          © {new Date().getFullYear()} Jorge Rodríguez. Código abierto en{" "}
+          <a
+            href="https://github.com/jorge-r-rodriguez/react-movies"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-indigo-400 underline hover:text-indigo-300"
+          >
+            GitHub
+          </a>.
+        </p>
+      </footer>
+    </>
   );
 };
 
