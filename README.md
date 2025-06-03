@@ -7,8 +7,6 @@
 3. 🔋 [Características](#características)
 4. 🤸 [Inicio Rápido](#inicio-rápido)
 5. 🕸️ [Snippets (Código)](#snippets)
-6. 🔗 [Recursos](#recursos)
-7. 🚀 [Más contenido](#más-contenido)
 
 ## 🤖 Introducción
 
